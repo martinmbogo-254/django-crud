@@ -1,0 +1,34 @@
+{% extends 'employee/base.html' %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>employee registration form</title>
+</head>
+
+<body>
+    {% block content %}
+    <div class="container mt-5">
+        <h4>EMPLOYEE FORM</h4>
+        <p>display of the employee lists after they have been added by the administrator</p>
+        {% for employee in employee_list %}
+        <li>{{employee.name}}</li>
+        <li>{{employee.emp_code}}</li>
+        <li>{{ employee.position}}</li>
+
+        <a class=" btn btn-primary m-3" href="{% url 'update' employee.id%}">update</a>
+
+        <form action="{% url 'delete' employee.id %}" method="post">
+            {% csrf_token%}
+            <button class="btn btn-danger text-light m-3">delete</button>
+            </>
+        </form>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <a class="btn btn-info text-light" href="{% url 'employee_form' %}">add user</a>
+    </div>
+    {% endblock content %}
+</body>
+
+</html>

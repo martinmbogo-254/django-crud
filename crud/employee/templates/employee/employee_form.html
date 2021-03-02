@@ -1,0 +1,46 @@
+{% extends 'employee/base.html' %} {% load crispy_forms_tags%}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>employee registration form</title>
+</head>
+
+<body>
+    {% block content %}
+
+    <a class="nav-link btn-warning" href="/admin">Admin</a>
+
+    <div class="row">
+
+        <div class="col-md-9 offset-md-2">
+            <div class="container">
+                <div class="jumbotron">
+                    <h4>EMPLOYEE FORM</h4>
+                    <form action="" method="post">
+                        {% csrf_token %} {{ form.name|as_crispy_field}} {{ form.email|as_crispy_field}} {{ form.mobile|as_crispy_field}}
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ form.emp_code|as_crispy_field}}
+                            </div>
+                            <div class="col-md-8">
+                                {{ form.position|as_crispy_field}}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-outline-info"><i class="fas fa-database"></i>Submit</button>
+                    </form>
+                </div>
+                <div>
+                    <a class="btn btn-info text-light m-2" href="{% url 'employee_list' %}">Go to list</a>
+                    <a class="btn btn-success  text-light m-2" href="{% url 'home'%}"> Home</a>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+    {% endblock content %}
+</body>
+
+</html>

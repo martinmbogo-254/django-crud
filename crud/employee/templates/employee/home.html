@@ -7,8 +7,69 @@
 
 <body>
     {% block content %}
-    <div class="container mt-4">
-        <button class="btn btn-success"><a href="{% url 'employee_form'%}">Go to Registar form</a></button>
+    <div class="row">
+        <div class="col-md-2 ">
+            {% include 'employee/sidebar.html'%}
+        </div>
+        <!-- <div class="col-md-1"></div> -->
+        <div class="col-md-9 ml-3">
+            <div class="row">
+                {% include 'employee/navbar.html'%}
+            </div>
+
+            <div class="container mt-4">
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card  shadow bg-white m-2">
+                            <div class="card-body">
+                                <h5 class="text-center m-2">No. of <br> Employees</h5>
+                                <hr>
+                                <h3 class="text-center"><span class="badge badge-info">{{total_employees}}</span></h3>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card shadow bg-white  m-2">
+                            <div class="card-body">
+                                <h5 class="text-center m-2">No. of <br> Departments</h5>
+                                <hr>
+                                <h3 class="text-center"><span class="badge badge-primary">{{total_employees}}</span></h3>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card  m-2 shadow bg-white">
+                            <div class="card-body">
+                                <h5 class="text-center m-2">No. of<br>Males</h5>
+                                <hr>
+                                <h3 class="text-center"><span class="badge badge-secondary">{{total_males}}</span></h3>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card shadow bg-white  m-2">
+                            <div class="card-body">
+                                <h5 class="text-center m-2">No. of <br> Females</h5>
+                                <hr>
+                                <h3 class="text-center"><span class="badge badge-success">{{total_females}}</span></h3>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+    </div>
+
     {% endblock content%}
 </body>

@@ -9,16 +9,36 @@
 <body>
     {% block content %}
 
-    <a class="nav-link btn-warning" href="/admin">Admin</a>
-
     <div class="row">
+        <div class="col-md-2">
+            {% include 'employee/sidebar.html'%}
+        </div>
+        <div class="col-md-9 ml-4 container">
+            <div class="row">
+                {% include 'employee/navbar.html'%}
+            </div>
 
-        <div class="col-md-9 offset-md-2">
             <div class="container">
-                <div class="jumbotron">
+                <div class="jumbotron m-3 mt-4">
                     <h4>EMPLOYEE FORM</h4>
                     <form action="" method="post">
-                        {% csrf_token %} {{ form.name|as_crispy_field}} {{ form.email|as_crispy_field}} {{ form.mobile|as_crispy_field}}
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {{ form.name|as_crispy_field}}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.email|as_crispy_field}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                {{ form.gender|as_crispy_field}}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form.mobile|as_crispy_field}}
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-4">
                                 {{ form.emp_code|as_crispy_field}}
@@ -27,7 +47,7 @@
                                 {{ form.position|as_crispy_field}}
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-outline-info"><i class="fas fa-database"></i>Submit</button>
+                        <button type="submit" class="btn btn-outline-info"><i class="fa fa-database"></i>  Submit</button>
                     </form>
                 </div>
                 <div>
@@ -37,7 +57,7 @@
 
             </div>
         </div>
-        <div class="col-md-2"></div>
+
     </div>
 
     {% endblock content %}

@@ -31,13 +31,18 @@ def homepage(request):
     females = Employee.objects.filter(gender='F')
     males = Employee.objects.filter(gender='M')
     employees = Employee.objects.all()
+    antivirus = Antivirus.objects.all()
     total_employees = employees.count()
     total_females = females.count()
     total_males = males.count()
+    total_records = antivirus.count()
+    
     context = {
         'total_employees': total_employees,
         'total_females': total_females,
         'total_males': total_males,
+        'total_records': total_records
+
     }
     return render(request, 'employee/home.html', context)
 
@@ -118,8 +123,9 @@ def antivirus_list(request):
         Q(directorate__icontains=q)|
         Q(comp_serial_no__icontains=q) 
     )
+    total_records = antivirus.count()
     context = {
-        'antivirus': antivirus
+        'antivirus': antivirus,
     }
     return render(request, 'employee/list.html', context)
 

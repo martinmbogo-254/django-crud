@@ -1,0 +1,107 @@
+{% extends 'employee/base.html' %} {% load crispy_forms_tags%}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>EASY TRACK INVENTORY MANAGEMENT SYSTEM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    {% block content %}
+    <div class="row">
+        <div class="col-md-2 ">
+            {% include 'employee/sidebar.html'%}
+        </div>
+
+        <div class="col-md-9 ml-3">
+            <div class="row">
+                {% include 'employee/navbar.html'%}
+            </div>
+           
+            <div class="container mt-5">
+                <div class="row">
+                <div class="col-md-6">
+                    <h4>ANTIVIRUS INSTALLATION RECORD</h4>
+                    
+                </div>
+                <div class="col-md-5">
+                    <form class="d-flex" method="GET">
+                        <input class="form-control me-2" type="text" name="q" placeholder="Search records here..." aria-label="Search">
+                        <button class="btn btn-outline-dark search ml-2" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search </button>
+                    </form>
+                </div>
+                </div>
+               
+
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3">
+                            <a href="{% url 'antivirus_form'%}" class="btn btn-info m-3 p-1"><i class="fa fa-plus"></i> Add Record</a>
+
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                    
+
+                    <table class="table  p-2 jumbortron">
+                        <thead>
+                            <tr>
+                                <th scope="col">Antivirus_id</th>
+                                <th scope="col">Officer name</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Directorate</th>
+                                <th scope="col">Comp_serial_no</th>
+                                <th scope="col"> Update</th>
+                                <th scope="col"> Delete</th>
+
+                               
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for antivirus in antivirus %}
+                            <tr>
+                                <td scope="row">{{antivirus.antivirus_id}}</td>
+                                <td>{{antivirus.officer_name|upper}}</td>
+                                <td>{{antivirus.department|upper}}</td>
+                                <td>{{antivirus.directorate|upper}}</td>
+                                <td>{{antivirus.comp_serial_no}}</td>
+                             
+
+                                <td>
+
+                                    <a class="" href="{% url 'update' antivirus.id %}"><i class="fa fa-pencil-square-o text-center text-info"></i></a>
+                                </td>
+                                <td>
+                                    <a href="">
+                                        <form action="" method="post">
+                                            {% csrf_token%}
+                                            <a href="{% url 'delete' antivirus.id %}"><i class="fa fa-trash-o text-danger"></i></a>
+                                        </form>
+                                    </a>
+                                </td>
+
+                                
+                            </tr>
+                         {% empty %}
+                         <div class="alert alert-info text-dark m-l mr-5 p-2">
+                             <p class="text-center">Sorry No record available!!</p>
+                         </div>
+                            {% endfor%}
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock content %}
+</body>
+
+</html>

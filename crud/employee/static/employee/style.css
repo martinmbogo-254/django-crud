@@ -6,3 +6,9 @@ body {
     background-color: #fff !important;
     border-radius: 30px !important;
 }
+.table th{
+    font-weight: normal;
+}
+.sidebar{
+    min-height: 100%;
+}

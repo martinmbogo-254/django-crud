@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -24,6 +25,53 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.name
+
+class Item(models.Model):
+    name = models.CharField(max_length=100)
+    item_type = models.CharField(max_length=250)
+    acquisition_cost = models.IntegerField(max_length=100)
+    source =models.CharField(max_length=100)
+    item_properties = models.TextField(max_length=250)
+    listing_platform = models.CharField(max_length=100)
+    Date =models.DateTimeField()
+    listing_price = models.IntegerField(max_length=100)
+    date_of_sale = models.DateTimeField()
+    sale_price = models.IntegerField(max_length=100)
+    item_image = models.FileField(upload_to='images/',default='images/default.jpg')
+
+    def __str__(self):
+        return self.name
+
+class Department(models.Model):
+    name = models.CharField(max_length=100)
+    
+
+    class Meta:
+        verbose_name = ("department")
+        verbose_name_plural = ("departments")
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse("_detail", kwargs={"pk": self.pk})
+
+class Antivirus(models.Model):
+    antivirus_id = models.CharField(max_length=250)
+    officer_name = models.CharField(max_length=250)
+    department = models.CharField(max_length=250)
+    directorate = models.CharField(max_length=250)
+    comp_serial_no =models.CharField(max_length=250)
+
+    class Meta:
+        verbose_name = ("antivirus")
+        verbose_name_plural = ("antiviruses")
+
+    def __str__(self):
+        return self.antivirus_id
+
+    def get_absolute_url(self):
+        return reverse("antivirus_list", kwargs={"pk": self.pk})
 
 
 

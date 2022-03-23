@@ -1,9 +1,10 @@
-{% extends 'employee/base.html' %} {% load crispy_forms_tags%}
+{% extends 'employee/base.html' %}
+{% load crispy_forms_tags %}
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>employee registration form</title>
+    <title>kaspersky registration form</title>
 </head>
 
 <body>
@@ -20,38 +21,36 @@
 
             <div class="container">
                 <div class="jumbotron m-3 mt-4">
-                    <h4>EMPLOYEE FORM</h4>
+                    <h4>KASPERSKY ENTRY FORM</h4>
                     <form action="" method="post">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-md-6">
-                                {{ form.name|as_crispy_field}}
+                                {{ form.antivirus_id|as_crispy_field}}
                             </div>
                             <div class="col-md-6">
-                                {{ form.email|as_crispy_field}}
+                                {{ form.officer_name|as_crispy_field}}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-8">
-                                {{ form.gender|as_crispy_field}}
+                                {{ form.department|as_crispy_field}}
                             </div>
                             <div class="col-md-4">
-                                {{ form.mobile|as_crispy_field}}
+                                {{ form.directorate|as_crispy_field}}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                {{ form.emp_code|as_crispy_field}}
+                                {{ form.comp_serial_no|as_crispy_field}}
                             </div>
-                            <div class="col-md-8">
-                                {{ form.position|as_crispy_field}}
-                            </div>
+                           
                         </div>
                         <button type="submit" class="btn btn-outline-info"><i class="fa fa-database"></i>  Submit</button>
                     </form>
                 </div>
                 <div>
-                    <a class="btn btn-info text-light m-2" href="{% url 'employee_list' %}">Go to list</a>
+                    <a class="btn btn-info text-light m-2" href="{% url 'antivirus_list' %}">Go to list</a>
                     <a class="btn btn-success  text-light m-2" href="{% url 'home'%}"> Home</a>
                 </div>
 

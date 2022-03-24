@@ -35,4 +35,4 @@ class ItemForm(forms.ModelForm):
 class AntivirusForm(forms.Form):
     class Meta:
         model= Antivirus
-        fields=('antivirus_id','officer_name','department','directorate','comp_serial_no')
+        fields=('kaspersky','officer_name','department','directorate','comp_serial_no')

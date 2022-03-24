@@ -1,10 +1,12 @@
+import csv
 from multiprocessing import context
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.urls import reverse_lazy
 from .forms import EmployeeForm,ItemForm, AntivirusForm, NewUserForm
 from django.views.generic import ListView
-from .models import Employee,Item, Antivirus
+from .models import Employee,Item, Antivirus,Department
 from .filters import EmployeeFilter
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
@@ -36,12 +38,15 @@ def homepage(request):
     total_females = females.count()
     total_males = males.count()
     total_records = antivirus.count()
+    department = Department.objects.all()
+    total_department = department.count()
     
     context = {
         'total_employees': total_employees,
         'total_females': total_females,
         'total_males': total_males,
-        'total_records': total_records
+        'total_records': total_records,
+        'total_department': total_department,
 
     }
     return render(request, 'employee/home.html', context)
@@ -117,15 +122,15 @@ def antivirus_list(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
 
     antivirus = Antivirus.objects.filter(
-        Q(antivirus_id__icontains=q) |
+        # Q(kaspersky__icontains=q) |
         Q(officer_name__icontains=q) |
-        Q(department__icontains=q)|
+        # Q(department__icontains=q)|
         Q(directorate__icontains=q)|
         Q(comp_serial_no__icontains=q) 
     )
-    total_records = antivirus.count()
     context = {
         'antivirus': antivirus,
+        
     }
     return render(request, 'employee/list.html', context)
 
@@ -192,3 +197,18 @@ def logout_request(request):
 	logout(request)
 	messages.info(request, "You have successfully logged out.") 
 	return redirect('login')
+
+def report(request):
+    response =HttpResponse(content_type ='text/csv')
+    response['content-disposition'] = 'attachment; filename=Antivirusinstallationreport.csv'
+
+    writer = csv.writer(response)
+
+    antivirus = Antivirus.objects.all()
+
+    writer.writerow(['kaspersky','Officer name','Department','Directorate','comp_serial_no'])  
+
+    for antivirus in antivirus:
+        writer.writerow([antivirus.kaspersky, antivirus.officer_name,antivirus.department,antivirus.directorate,antivirus.comp_serial_no])
+
+    return response

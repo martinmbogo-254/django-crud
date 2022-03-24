@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-5">
                     <form class="d-flex" method="GET">
-                        <input class="form-control me-2" type="text" name="q" placeholder="Search records here..." aria-label="Search">
+                        <input class="form-control me-2" type="text" name="q" placeholder="Search by name,computer s/n..." aria-label="Search">
                         <button class="btn btn-outline-dark search ml-2" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search </button>
                     </form>
                 </div>
@@ -37,19 +37,15 @@
 
                 <div class="row">
                     <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-3">
-                            <a href="{% url 'antivirus_form'%}" class="btn btn-info m-3 p-1"><i class="fa fa-plus"></i> Add Record</a>
+                        <a href="{% url 'antivirus_form'%}" class="btn btn-info m-3 ml-5 p-2"><i class="fa fa-plus"></i> Add Record</a>
 
-                        </div>
-                        <div class="col-md-3"></div>
                     </div>
                     
 
                     <table class="table  p-2 jumbortron">
                         <thead>
                             <tr>
-                                <th scope="col">Antivirus_id</th>
+                                <th scope="col">kaspersky</th>
                                 <th scope="col">Officer name</th>
                                 <th scope="col">Department</th>
                                 <th scope="col">Directorate</th>
@@ -64,7 +60,7 @@
                         <tbody>
                             {% for antivirus in antivirus %}
                             <tr>
-                                <td scope="row">{{antivirus.antivirus_id}}</td>
+                                <td scope="row">{{antivirus.kaspersky}}</td>
                                 <td>{{antivirus.officer_name|upper}}</td>
                                 <td>{{antivirus.department|upper}}</td>
                                 <td>{{antivirus.directorate|upper}}</td>
@@ -94,8 +90,10 @@
 
                         </tbody>
                     </table>
+<div class="download">
+    <a href="{% url 'download-report' %}" class="btn btn-dark">Download Report</a>
 
-
+</div>
                 </div>
             </div>
         </div>

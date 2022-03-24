@@ -53,13 +53,17 @@ class Department(models.Model):
     def __str__(self):
         return self.name
 
-    def get_absolute_url(self):
-        return reverse("_detail", kwargs={"pk": self.pk})
+   
+class kaspersky(models.Model):
+    unid = models.TextField(max_length=100)
+
+    def __str__(self):
+        return self.unid
 
 class Antivirus(models.Model):
-    antivirus_id = models.CharField(max_length=250)
+    kaspersky = models.ForeignKey(kaspersky,on_delete=models.CASCADE)
     officer_name = models.CharField(max_length=250)
-    department = models.CharField(max_length=250)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
     directorate = models.CharField(max_length=250)
     comp_serial_no =models.CharField(max_length=250)
 
@@ -68,7 +72,7 @@ class Antivirus(models.Model):
         verbose_name_plural = ("antiviruses")
 
     def __str__(self):
-        return self.antivirus_id
+        return self.kaspersky
 
     def get_absolute_url(self):
         return reverse("antivirus_list", kwargs={"pk": self.pk})

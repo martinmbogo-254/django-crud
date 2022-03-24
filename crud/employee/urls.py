@@ -21,7 +21,7 @@ urlpatterns = [
     path('item/new', ItemCreateView.as_view(), name='item_form'),
     path('entry/<int:pk>/update', AntivirusUpdateView.as_view(), name='update'),
     path('entry/<int:pk>/delete', AntivirusDeleteView.as_view(), name='delete'),
-
+    path('antivirusreport', views.report , name='download-report'),
     path('', auth_views.LoginView.as_view(template_name='employee/login.html'), name='login'),
     path('register', views.register_request, name='register'),
     path("logout", views.logout_request, name= "logout"),

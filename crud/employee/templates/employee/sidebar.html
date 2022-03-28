@@ -2,28 +2,37 @@
 {% load crispy_forms_tags %}
 {% block content%}
 <div class="row">
-
-
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse m-1 p-1" style="position: fixed; margin-top:30px;">
+        <div class="position-sticky pt-3">
+          <nav>
+              
     <div class="col-md-2 position-fixed bg-dark text-light p-2 rounded sidebar" data-spy="scroll" data-target="#main" style="min-height:600px;" id="sticky-sidebar">
         <a class="navbar-brand" href="#">  {% load static %}
                 <img class="ml-2" src="https://dashkit.goodthemes.co/assets/img/logo.svg" style="height: 60px;">
             </a>
         <div>
-            <h4 class="m-2">INVENTORY MANAGEMENT SYSTEM</h4>
+            <h4 class="m-2">ANTIVIRUS MANAGEMENT SYSTEM</h4>
             <hr class="text-info">
         </div>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a href="/admin" class="nav-link text-light"> <i class="fa fa-home m-1 text-info"></i> Admin</a>
-                <a href="{% url 'home'%}" class="nav-link text-light"><i class="fa fa-columns m-1 text-info"></i>  Dashboard</a>
-                <a href="" class="nav-link text-light"><i class="fa fa-building m-1 text-info"></i>  Departments</a>
-                <a href="" class="nav-link text-light"> <i class="fa fa-tasks m-1 text-info"></i> Projects</a>
-                <a href="" class="nav-link text-light"> <i class="fa fa-calendar m-1 text-info"></i> Events</a>
-                <a href="" class="nav-link text-light"> <i class="fa fa-briefcase m-1 text-info"></i> Job Portal</a>
-            </li>
-        </ul>
+        
+            <div class="d-flex flex-column flex-shrink-1 text-black  p-2 position-sticky collapse mt-5" id="sidebar" style="width: 280px; position:fixed;">
+               
+
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a href="/admin" class="nav-link text-light"> <i class="fa fa-home m-1 text-info"></i> Admin</a>
+                        <a href="{% url 'home'%}" class="nav-link text-light"><i class="fa fa-columns m-1 text-info"></i>  Dashboard</a>
+                        <a href="" class="nav-link text-light"><i class="fa fa-building m-1 text-info"></i>  Departments</a>
+                        <a href="" class="nav-link text-light"> <i class="fa fa-tasks m-1 text-info"></i> Projects</a>
+                        <a href="" class="nav-link text-light"> <i class="fa fa-calendar m-1 text-info"></i> Events</a>
+                        <a href="" class="nav-link text-light"> <i class="fa fa-briefcase m-1 text-info"></i> Job Portal</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+   
+
 
     </div>
-    <div class="col-md-9"></div>
 </div>
 {% endblock content%}

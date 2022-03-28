@@ -14,6 +14,9 @@ from django.db.models import Q
 from django.contrib.auth import login,authenticate,logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 
@@ -28,7 +31,7 @@ def sidebar(request):
 def navbar(request):
     return render(request, 'employee/navbar.html')
 
-
+@login_required(login_url='login')
 def homepage(request):
     females = Employee.objects.filter(gender='F')
     males = Employee.objects.filter(gender='M')
@@ -51,6 +54,7 @@ def homepage(request):
     }
     return render(request, 'employee/home.html', context)
 
+@login_required(login_url='login')
 
 def employee_list(request):
     employees = Employee.objects.all()
@@ -63,6 +67,7 @@ def employee_list(request):
     return render(request, 'employee/employee_list.html', context)
 
 
+@login_required(login_url='login')
 
 def employee_delete(request, id):
     employee = Employee.objects.get(pk=id)
@@ -70,6 +75,7 @@ def employee_delete(request, id):
     return redirect('employee_list')
 
 
+@login_required(login_url='login')
 
 def item_list(request):
    
@@ -85,7 +91,7 @@ def employee_form(request, id=0):
 
 
 
-class ItemCreateView( CreateView):
+class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
     template_name = 'employee/item_form.html'
     fields = ['name', 'item_type', 'acquisition_cost', 'source', 'item_properties', 'listing_platform','Date','listing_price','date_of_sale','sale_price','item_image']
@@ -93,14 +99,14 @@ class ItemCreateView( CreateView):
 
 
 
-class ItemUpdateView( UpdateView):
+class ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = Item
     template_name = 'employee/item_form.html'
     fields = ['name', 'item_type', 'acquisition_cost', 'source', 'item_properties', 'listing_platform','Date','listing_price','date_of_sale','sale_price','item_image']
     success_url = reverse_lazy('item_list')
 
 
-class ItemDeleteView( DeleteView):
+class ItemDeleteView(LoginRequiredMixin, DeleteView):
     model = Item
     template_name = 'employee/item_delete_confirm.html'
     success_url = reverse_lazy('item_list')
@@ -117,6 +123,7 @@ def item_form(request, id=0):
    pass
 
 
+@login_required(login_url='login')
 
 def antivirus_list(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -136,21 +143,21 @@ def antivirus_list(request):
 
 
 
-class AntivirusCreateView( CreateView):
+class AntivirusCreateView(LoginRequiredMixin, CreateView):
     model = Antivirus
     template_name = 'employee/antivirus_form.html'
     fields ='__all__'
     success_url = reverse_lazy('antivirus_list')
 
 
-class AntivirusDeleteView( DeleteView):
+class AntivirusDeleteView(LoginRequiredMixin, DeleteView):
     model = Antivirus
     template_name = 'employee/item_delete_confirm.html'
     success_url = reverse_lazy('antivirus_list')
 
 
 
-class AntivirusUpdateView( UpdateView):
+class AntivirusUpdateView(LoginRequiredMixin, UpdateView):
     model = Antivirus
     template_name = 'employee/antivirus_form.html'
     fields ='__all__'
@@ -198,6 +205,7 @@ def logout_request(request):
 	messages.info(request, "You have successfully logged out.") 
 	return redirect('login')
 
+@login_required(login_url='login')
 def report(request):
     response =HttpResponse(content_type ='text/csv')
     response['content-disposition'] = 'attachment; filename=Antivirusinstallationreport.csv'
